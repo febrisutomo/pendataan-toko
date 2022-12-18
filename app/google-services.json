@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "948204336259",
+    "project_id": "getukgoreng-b9394",
+    "storage_bucket": "getukgoreng-b9394.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948204336259:android:016884b144bfd1018d97b6",
+        "android_client_info": {
+          "package_name": "crud.si20.pendataantoko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948204336259-f2e0baghcpata81hat7svpqntnt6ck9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJP8WQciJta5SdE8rySJWBA7wlxtNloBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948204336259-f2e0baghcpata81hat7svpqntnt6ck9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

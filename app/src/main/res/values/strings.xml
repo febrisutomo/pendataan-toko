@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Pendataan Toko</string>
+
+    <array name="berat">
+        <item>Pilih Berat Produk</item>
+        <item>250 gram</item>
+        <item>500 gram</item>
+        <item>1 kg</item>
+        <item>1.5 kg</item>
+        <item>2 kg</item>
+        <item>2.5 kg</item>
+        <item>3 kg</item>
+        <item>3.5 kg</item>
+    </array>
+
+</resources>
