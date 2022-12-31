@@ -13,14 +13,28 @@
         android:theme="@style/Theme.PendataanToko"
         tools:targetApi="31">
         <activity
-            android:name=".EditTokoActivity"
+            android:name=".LokasiActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddTokoActivity"
+            android:name=".EditPemilikActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddPemilikActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PemilikActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -97,9 +111,6 @@
                 android:value="" />
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
             android:name=".ProdukActivity"
@@ -135,6 +146,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5838160697635689~8511023213" />
+
     </application>
 
 </manifest>

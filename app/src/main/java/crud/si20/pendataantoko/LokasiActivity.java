@@ -22,12 +22,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class TokoActivity extends AppCompatActivity {
+public class LokasiActivity extends AppCompatActivity {
 
-    TokoViewAdapter adapter;
+    LokasiViewAdapter adapter;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     ArrayList<Toko> tokoList;
-    ArrayList<Pemilik> pemilikList;
     RecyclerView recyclerView;
     EditText etSearch;
 
@@ -35,7 +34,7 @@ public class TokoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toko);
+        setContentView(R.layout.activity_lokasi);
 
         etSearch = findViewById(R.id.etSearch);
 
@@ -57,41 +56,16 @@ public class TokoActivity extends AppCompatActivity {
         });
 
 
-        recyclerView = findViewById(R.id.rvToko);
+        recyclerView = findViewById(R.id.rvLokasi);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        pemilikList = new ArrayList<>();
-
-        getPemilik();
 
         showData();
 
 
     }
 
-    private void getPemilik() {
-
-        db.child("Pemilik").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                pemilikList = new ArrayList<>();
-                for (DataSnapshot item : snapshot.getChildren()){
-                    Pemilik pemilik= item.getValue(Pemilik.class);
-
-                    pemilik.setKey(item.getKey());
-                    pemilikList.add(pemilik);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
 
     private void showData() {
         db.child("Toko").addValueEventListener(new ValueEventListener() {
@@ -105,7 +79,7 @@ public class TokoActivity extends AppCompatActivity {
                     tokoList.add(toko);
                 }
 
-                adapter = new TokoViewAdapter(tokoList, pemilikList);
+                adapter = new LokasiViewAdapter(tokoList);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -122,7 +96,7 @@ public class TokoActivity extends AppCompatActivity {
         ArrayList<Toko> filteredList = new ArrayList<>();
 
         for (Toko item : tokoList){
-            if (item.getNama().toLowerCase().contains(text.toLowerCase())){
+            if (item.getNama().toLowerCase().contains(text.toLowerCase()) || item.getAlamat().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }

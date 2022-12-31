@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:padding="16dp"
-    tools:context=".TokoActivity">
+    tools:context=".PemilikActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Data Toko"
+            android:text="Data Pemilik"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -28,18 +28,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:hint="Cari Toko"
+            android:hint="Cari Pemilik"
             android:layout_marginBottom="16dp"
             android:inputType="textPersonName" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvToko"
+            android:id="@+id/rvPemilik"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/etSearch"
             android:layout_alignParentTop="true"
-            tools:listitem="@layout/design_toko" />
+            tools:listitem="@layout/design_pemilik" />
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnTambah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="11dp"
+        android:src="@drawable/ic_outline_add_24" />
 
 </RelativeLayout>

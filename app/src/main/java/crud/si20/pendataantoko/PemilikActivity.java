@@ -22,20 +22,23 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class TokoActivity extends AppCompatActivity {
+public class PemilikActivity extends AppCompatActivity {
 
-    TokoViewAdapter adapter;
+    PemilikViewAdapter adapter;
     DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-    ArrayList<Toko> tokoList;
     ArrayList<Pemilik> pemilikList;
+    ArrayList<Toko> tokoList;
     RecyclerView recyclerView;
     EditText etSearch;
+    FloatingActionButton btnTambah;
+
+    String namaToko, alamatToko;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toko);
+        setContentView(R.layout.activity_pemilik);
 
         etSearch = findViewById(R.id.etSearch);
 
@@ -56,44 +59,29 @@ public class TokoActivity extends AppCompatActivity {
             }
         });
 
+        btnTambah = findViewById(R.id.btnTambah);
 
-        recyclerView = findViewById(R.id.rvToko);
+        btnTambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PemilikActivity.this, AddPemilikActivity.class));
+            }
+        });
+
+
+        recyclerView = findViewById(R.id.rvPemilik);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        pemilikList = new ArrayList<>();
-
-        getPemilik();
+        tokoList = new ArrayList<>();
+        getToko();
 
         showData();
 
 
     }
 
-    private void getPemilik() {
-
-        db.child("Pemilik").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                pemilikList = new ArrayList<>();
-                for (DataSnapshot item : snapshot.getChildren()){
-                    Pemilik pemilik= item.getValue(Pemilik.class);
-
-                    pemilik.setKey(item.getKey());
-                    pemilikList.add(pemilik);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    private void showData() {
+    private void getToko() {
         db.child("Toko").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -105,7 +93,28 @@ public class TokoActivity extends AppCompatActivity {
                     tokoList.add(toko);
                 }
 
-                adapter = new TokoViewAdapter(tokoList, pemilikList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void showData() {
+        db.child("Pemilik").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pemilikList = new ArrayList<>();
+                for (DataSnapshot item : snapshot.getChildren()){
+                    Pemilik pemilik= item.getValue(Pemilik.class);
+
+                    pemilik.setKey(item.getKey());
+                    pemilikList.add(pemilik);
+                }
+
+                adapter = new PemilikViewAdapter(pemilikList, tokoList);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -119,10 +128,18 @@ public class TokoActivity extends AppCompatActivity {
 
 
     private void filter(String text) {
-        ArrayList<Toko> filteredList = new ArrayList<>();
+        ArrayList<Pemilik> filteredList = new ArrayList<>();
 
-        for (Toko item : tokoList){
-            if (item.getNama().toLowerCase().contains(text.toLowerCase())){
+        for (Pemilik item : pemilikList){
+            namaToko = "";
+            alamatToko = "";
+            for (Toko toko : tokoList) {
+                if (toko.getKey().equals(item.getToko())) {
+                    namaToko = toko.getNama();
+                    alamatToko = toko.getAlamat();
+                }
+            }
+            if (item.getNama().toLowerCase().contains(text.toLowerCase()) || item.getNoHp().toLowerCase().contains(text.toLowerCase())  || item.getJk().toLowerCase().contains(text.toLowerCase()) || namaToko.toLowerCase().contains(text.toLowerCase()) || alamatToko.toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }
